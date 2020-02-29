@@ -103,7 +103,6 @@ function! s:PlayItCool(old, new)
             noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
         endif
 
-        autocmd Cool CursorMoved * call <SID>StartHL()
         autocmd Cool InsertEnter * call <SID>StopHL()
     elseif a:old == 1 && a:new == 0
         " hls --> nohls
@@ -111,7 +110,6 @@ function! s:PlayItCool(old, new)
         nunmap <Plug>(StopHL)
         unmap! <expr> <Plug>(StopHL)
 
-        autocmd! Cool CursorMoved
         autocmd! Cool InsertEnter
     else
         " nohls --> nohls
