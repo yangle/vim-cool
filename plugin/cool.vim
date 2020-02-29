@@ -43,7 +43,8 @@ function! s:StartHL()
             throw 0
         endif
     catch /^\%(0$\|Vim\%(\w\|:Interrupt$\)\@!\)/
-        call <SID>StopHL()
+        " Patch: Do not stop highlighting on CursorMoved.
+        " call <SID>StopHL()
         return
     finally
         call winrestview(pos)
