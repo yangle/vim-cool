@@ -31,7 +31,12 @@ function! s:StartHL()
     endif
     let g:cool_is_searching = 1
     let [pos, rpos] = [winsaveview(), getpos('.')]
-    silent! exe "keepjumps go".(line2byte('.')+col('.')-(v:searchforward ? 2 : 0))
+    let byte = line2byte('.')+col('.')-(v:searchforward ? 2 : 0)
+
+    if byte <= 0
+      return
+    endif
+    silent! exe "keepjumps go".byte
     try
         silent keepjumps norm! n
         if getpos('.') != rpos
